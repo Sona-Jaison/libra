@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    td {
+      border: 1px solid #ddd;
+    }
+
+    .note {
+      font-style: italic;
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .logout-button {
+      background-color: #f44336;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .logout-button:hover {
+      background-color: #e53935;
+    }
+
+    .home-button {
+      background-color: #2196F3;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .home-button:hover {
+      background-color: #1976D2;
+    }
+
+  </style>
+</head>
+<body>
+
+<h2>Chart</h2>
+
+<table>
+  <tr>
+    <th>Report Type</th>
+    <th>Actions</th>
+    <th>Notes</th>
+  </tr>
+  <tr>
+    <td>Available Reports</td>
+    <td><button class="home-button">Home</button></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Master List of Books</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Master List of Movies</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Master List of Memberships</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Active Issues</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Overdue returns</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Pending Issue Requests</td>
+    <td><button class="logout-button" onclick="logout()">Log Out</button></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td class="note">Note: If logged in as Admin - home will take you to the Admin Home Page</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td class="note">If logged in as User - home will take you to the User Home Page</td>
+  </tr>
+</table>
+
+<script>
+  function logout() {
+    // Redirect to the login page when clicked
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Issue Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    label {
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>Book Issue Form</h2>
+
+  <div class="form-container">
+    <form id="issueForm" onsubmit="return validateForm()">
+      <label for="bookName">Book Name</label>
+      <select id="bookName" name="bookName" onchange="populateAuthor()">
+        <option value="">Select a book</option>
+        <option value="Harry Potter">Harry Potter</option>
+        <option value="The Alchemist">The Alchemist</option>
+        <option value="Brief History of Time">Brief History of Time</option>
+        <option value="War and Peace">War and Peace</option>
+      </select>
+
+      <label for="authorName">Author Name</label>
+      <input type="text" id="authorName" name="authorName" readonly>
+
+      <label for="issueDate">Issue Date</label>
+      <input type="date" id="issueDate" name="issueDate" min="" required>
+
+      <label for="returnDate">Return Date</label>
+      <input type="date" id="returnDate" name="returnDate" min="" required>
+
+      <label for="remarks">Remarks (optional)</label>
+      <textarea id="remarks" name="remarks" rows="4"></textarea>
+
+      <button type="submit">Submit</button>
+
+      <div id="errorMessage" class="error-message" style="display: none;">
+        Please make a valid selection of the features and fill the required fields.
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function populateAuthor() {
+      var bookName = document.getElementById('bookName').value;
+      var authorName = document.getElementById('authorName');
+      
+      // Set author name based on book selection
+      if (bookName === "Harry Potter") {
+        authorName.value = "J.K. Rowling";
+      } else if (bookName === "The Alchemist") {
+        authorName.value = "Paulo Coelho";
+      } else if (bookName === "Brief History of Time") {
+        authorName.value = "Stephen Hawking";
+      } else if (bookName === "War and Peace") {
+        authorName.value = "Leo Tolstoy";
+      } else {
+        authorName.value = "";
+      }
+    }
+
+    function setDateFields() {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var yyyy = today.getFullYear();
+      today = yyyy + '-' + mm + '-' + dd;
+
+      // Set Issue Date to today and min Return Date to 15 days ahead
+      document.getElementById('issueDate').setAttribute('min', today);
+      document.getElementById('returnDate').setAttribute('min', today);
+
+      // Set Return Date to 15 days ahead by default
+      var returnDate = new Date(today);
+      returnDate.setDate(returnDate.getDate() + 15);
+      var returnDateStr = returnDate.toISOString().split('T')[0];
+      document.getElementById('returnDate').value = returnDateStr;
+    }
+
+    function validateForm() {
+      var bookName = document.getElementById('bookName').value;
+      var issueDate = document.getElementById('issueDate').value;
+      var returnDate = document.getElementById('returnDate').value;
+      var errorMessage = document.getElementById('errorMessage');
+
+      if (bookName === "" || issueDate === "" || returnDate === "") {
+        errorMessage.style.display = "block";
+        return false; // Prevent form submission
+      }
+
+      // Validate if return date is within 15 days from issue date
+      var issueDateObj = new Date(issueDate);
+      var returnDateObj = new Date(returnDate);
+      var maxReturnDate = new Date(issueDateObj);
+      maxReturnDate.setDate(maxReturnDate.getDate() + 15);
+
+      if (returnDateObj > maxReturnDate) {
+        errorMessage.style.display = "block";
+        errorMessage.innerHTML = "Return date cannot be more than 15 days after the issue date.";
+        return false;
+      }
+
+      // Hide error message if all validation passes
+      errorMessage.style.display = "none";
+      return true; // Allow form submission
+    }
+
+    // Call setDateFields when the page loads
+    window.onload = setDateFields;
+  </script>
+
+</body>
+</html>

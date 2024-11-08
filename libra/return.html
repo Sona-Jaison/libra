@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            color: #333;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-container input[type="date"]:disabled {
+            background-color: #f0f0f0;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .form-container p {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Return Book Form</h2>
+
+<div class="form-container">
+    <form id="returnBookForm" action="payFinePage.html" method="POST">
+        <label for="bookName">Name of Book:</label>
+        <input type="text" id="bookName" name="bookName" required placeholder="Enter book name"><br>
+
+        <label for="serialNo">Serial No:</label>
+        <input type="text" id="serialNo" name="serialNo" required placeholder="Enter serial number"><br>
+
+        <label for="issueDate">Issue Date:</label>
+        <input type="date" id="issueDate" name="issueDate" value="2024-11-08" readonly><br>
+
+        <label for="returnDate">Return Date:</label>
+        <input type="date" id="returnDate" name="returnDate" value="2024-11-08"><br>
+
+        <div id="error" class="error" style="display:none;">Please fill all the required fields.</div>
+
+        <button type="submit" id="confirmBtn">Confirm</button>
+    </form>
+
+    <p>By clicking "Confirm", you will be directed to the Pay Fine page.</p>
+</div>
+
+<script>
+    // Validate form on submit
+    document.getElementById('returnBookForm').onsubmit = function(event) {
+        var bookName = document.getElementById('bookName').value;
+        var serialNo = document.getElementById('serialNo').value;
+        var returnDate = document.getElementById('returnDate').value;
+
+        if (!bookName || !serialNo || !returnDate) {
+            event.preventDefault();
+            document.getElementById('error').style.display = 'block';
+        } else {
+            document.getElementById('error').style.display = 'none';
+        }
+    };
+</script>
+
+</body>
+</html>

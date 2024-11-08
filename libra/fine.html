@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Fine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+            color: #333;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="date"],
+        .form-container input[type="checkbox"] {
+            width: 100%;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .form-container p {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Pay Fine Page</h2>
+
+<div class="form-container">
+    <form id="payFineForm" action="bookReturnSuccessPage.html" method="POST">
+        <label for="bookName">Name of Book:</label>
+        <input type="text" id="bookName" name="bookName" value="Sample Book" readonly><br>
+
+        <label for="serialNo">Serial No:</label>
+        <input type="text" id="serialNo" name="serialNo" value="12345" readonly><br>
+
+        <label for="issueDate">Issue Date:</label>
+        <input type="date" id="issueDate" name="issueDate" value="2024-11-08" readonly><br>
+
+        <label for="returnDate">Return Date:</label>
+        <input type="date" id="returnDate" name="returnDate" value="2024-11-08" readonly><br>
+
+        <label for="fineAmount">Fine Amount:</label>
+        <input type="text" id="fineAmount" name="fineAmount" value="0" readonly><br>
+
+        <label for="finePaid">Fine Paid:</label>
+        <input type="checkbox" id="finePaid" name="finePaid"><br>
+
+        <label for="remarks">Remarks:</label>
+        <input type="text" id="remarks" name="remarks" placeholder="Enter remarks if any"><br>
+
+        <div id="error" class="error" style="display:none;">Please complete all required actions to proceed with the return.</div>
+
+        <button type="submit" id="confirmBtn">Confirm</button>
+    </form>
+
+    <p>By clicking "Confirm", you will complete the book return process.</p>
+</div>
+
+<script>
+    // Check if fine is pending or not
+    const fineAmount = parseInt(document.getElementById('fineAmount').value);
+
+    // Validate form on submit
+    document.getElementById('payFineForm').onsubmit = function(event) {
+        const finePaid = document.getElementById('finePaid').checked;
+        const remarks = document.getElementById('remarks').value;
+
+        // If there is a fine and it hasn't been paid, show error
+        if (fineAmount > 0 && !finePaid) {
+            event.preventDefault();
+            document.getElementById('error').style.display = 'block';
+        }
+        // If fine is not pending, no need for finePaid checkbox
+        else if (fineAmount === 0) {
+            document.getElementById('error').style.display = 'none';
+        }
+        // If fine is pending and remarks are missing
+        else if (fineAmount > 0 && remarks.trim() === '') {
+            event.preventDefault();
+            document.getElementById('error').style.display = 'block';
+        } else {
+            document.getElementById('error').style.display = 'none';
+        }
+    };
+</script>
+
+</body>
+</html>

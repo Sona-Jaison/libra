@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Available Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    label {
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>Book Availability Form</h2>
+
+  <div class="form-container">
+    <form id="bookForm" onsubmit="return validateForm()">
+      <label for="bookName">Book Name</label>
+      <input type="text" id="bookName" name="bookName" placeholder="Enter Book Name">
+
+      <label for="bookCategory">Select Book Category</label>
+      <select id="bookCategory" name="bookCategory">
+        <option value="">Select a category</option>
+        <option value="fiction">Fiction</option>
+        <option value="nonfiction">Non-fiction</option>
+        <option value="science">Science</option>
+        <option value="history">History</option>
+      </select>
+
+      <button type="submit">Submit</button>
+
+      <div id="errorMessage" class="error-message" style="display: none;">
+        Please make a valid selection before submitting.
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      var bookName = document.getElementById('bookName').value;
+      var bookCategory = document.getElementById('bookCategory').value;
+      var errorMessage = document.getElementById('errorMessage');
+
+      if (bookName === "" && bookCategory === "") {
+        errorMessage.style.display = "block";
+        return false; // Prevent form submission
+      }
+
+      // If one or both are filled, hide the error message
+      errorMessage.style.display = "none";
+      return true; // Allow form submission
+    }
+  </script>
+
+</body>
+</html>

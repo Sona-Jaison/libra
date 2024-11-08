@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Library Management System</h2>
+        <div class="tab">
+            <button class="tablinks" onclick="openLogin(event, 'User')" id="defaultOpen">User Login</button>
+            <button class="tablinks" onclick="openLogin(event, 'Admin')">Admin Login</button>
+        </div>
+
+        <!-- User Login Form -->
+        <div id="User" class="tabcontent">
+            <form id="userLoginForm" onsubmit="redirectToUser(event)">
+                <label for="userUsername">Username:</label>
+                <input type="text" id="userUsername" name="username" required>
+                
+                <label for="userPassword">Password:</label>
+                <input type="password" id="userPassword" name="password" required>
+                
+                <button type="submit">Login as User</button>
+            </form>
+        </div>
+
+        <!-- Admin Login Form -->
+        <div id="Admin" class="tabcontent">
+            <form id="adminLoginForm" onsubmit="redirectToAdmin(event)">
+                <label for="adminUsername">Admin Username:</label>
+                <input type="text" id="adminUsername" name="username" required>
+                
+                <label for="adminPassword">Password:</label>
+                <input type="password" id="adminPassword" name="password" required>
+                
+                <button type="submit">Login as Admin</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle tab switching
+        function openLogin(evt, loginType) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(loginType).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Set default tab to open
+        document.getElementById("defaultOpen").click();
+
+        // Redirect to user page
+        function redirectToUser(event) {
+            event.preventDefault();  // Prevent the form from submitting
+            window.location.href = 'user_login1.html';  // Redirect to user page
+        }
+
+        // Redirect to admin page
+        function redirectToAdmin(event) {
+            event.preventDefault();  // Prevent the form from submitting
+            window.location.href = 'admin1_home.html';  // Redirect to admin page
+        }
+    </script>
+</body>
+</html>

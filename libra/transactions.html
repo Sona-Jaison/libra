@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="transaction-container">
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <a href="#">Chart</a>
+            <a href="#" class="active">Transactions</a>
+            <a href="#" onclick="goHome()">Home</a>
+            <a href="#" class="logout" onclick="logout()">Log Out</a>
+        </div>
+
+        <!-- Transactions Options -->
+        <h2>Transactions</h2>
+        <div class="transaction-options">
+            <ul>
+                <li><a href="book_avail.html">Is book available?</a></li>
+                <li><a href="issue_book.html">Issue book?</a></li>
+                <li><a href="return.html">Return book?</a></li>
+                <li><a href="fine.html">Pay Fine?</a></li>
+            </ul>
+        </div>
+
+        <!-- Note Section -->
+        <div class="note">
+            <p><strong>Note:</strong> If logged in as Admin - Home will take you to Admin Home Page.<br>
+            If logged in as User - Home will take you to User Home Page.</p>
+        </div>
+    </div>
+
+    <script>
+        function goHome() {
+            // Check user role and redirect accordingly
+            // Here we assume "role" would be set by your backend or session management
+            const role = "admin"; // Example value; change it to "user" for user role testing
+            if (role === "admin") {
+                window.location.href = 'admin_home.html';
+            } else {
+                window.location.href = 'user_home.html';
+            }
+        }
+
+        function logout() {
+            // Redirect to login page
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

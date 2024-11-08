@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #333;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .logout {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Maintenance Page</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Housekeeping</a>
+    <a href="#">Membership</a>
+    <a href="#">Books/Movies</a>
+    <a href="#">User  Management</a>
+</nav>
+
+<div class="container">
+    <h2>Manage Your Content</h2>
+    <ul>
+        <li>Housekeeping: <a href="#">Add</a> | <a href="#">Update</a></li>
+        <li>Membership: <a href="#">Add</a> | <a href="#">Update</a></li>
+        <li>Books/Movies: <a href="#">Add</a> | <a href="#">Update</a></li>
+        <li>User Management: <a href="#">Add</a> | <a href="#">Update</a></li>
+    </ul>
+</div>
+
+<div class="logout">
+    <a href="index.html" onclick="logout()">Log Out</a>
+</div>
+
+<script>
+    function logout() {
+        // Perform any logout actions here (like clearing sessions, etc.)
+        window.location.href = "index.html"; // Redirect to index page
+    }
+</script>
+
+</body>
+</html>
